@@ -65,7 +65,7 @@ subscriptions model =
 
 view : Model -> Document Msg
 view model =
-    { title = "Tutte le cose più belle che abbiamo, le abbiamo fatte insieme a te"
+    { title = "Giovanna"
     , body = body model
     }
 

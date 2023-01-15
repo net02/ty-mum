@@ -24,8 +24,7 @@ TODOs, nice-to-have and ideas
 - [ ] setup analytics
 - [ ] add captions
 - [ ] add "go full-screen" buttons
-- [x] no i won't add a cookie settings banner, thank you!
+- [x] ~~no i won't add a cookie settings banner, thank you!~~
 - [ ] improve mobile UX/UI
-- [ ]
 - [ ] add photos' location and show it a map
 - [ ] add a loader at startup, animations and some extra *fronzoli*
