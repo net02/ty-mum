@@ -3,7 +3,6 @@ module View exposing (document)
 import Browser exposing (Document)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick, onMouseEnter, onMouseLeave)
 import Model exposing (Model)
 import Msg
 
@@ -19,10 +18,7 @@ body : Model -> List (Html Msg.Msg)
 body model =
     [ div [ class "main" ]
         [ img
-            [ src (imageToSrc model)
-            , onClick Msg.SwitchImage
-            , onMouseEnter Msg.SwitchImage
-            , onMouseLeave Msg.SwitchImage
+            [ src "./mosaic/base.png"
             , id "mosaic"
             ]
             []
@@ -43,13 +39,3 @@ body model =
             ]
         ]
     ]
-
-
-imageToSrc : Model.Image -> String
-imageToSrc image =
-    case image of
-        Model.Base ->
-            "./mosaic/base.png"
-
-        Model.Clean ->
-            "./mosaic/clear.png"

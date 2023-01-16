@@ -10,7 +10,7 @@ import View
 main : Program () Model Msg
 main =
     Browser.document
-        { init = Model.init
+        { init = \_ -> ( Model.initialModel, Cmd.none )
         , update = Update.update
         , view = View.document
         , subscriptions = \_ -> Sub.none

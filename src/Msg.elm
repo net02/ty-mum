@@ -1,5 +1,9 @@
 module Msg exposing (..)
 
+import Model exposing (Tile)
+
 
 type Msg
-    = SwitchImage
+    = ShowTile Tile
+    | HideTile
+    | UpdateTile Tile

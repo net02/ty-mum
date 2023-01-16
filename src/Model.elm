@@ -1,17 +1,35 @@
 module Model exposing (..)
 
-import Msg exposing (Msg)
-
 
 type alias Model =
-    Image
+    { current : Maybe Tile
+    , matrix : List Row
+    }
 
 
-type Image
-    = Base
-    | Clean
+type alias Tile =
+    String
 
 
-init : flags -> ( Model, Cmd Msg )
-init _ =
-    ( Base, Cmd.none )
+type alias Row =
+    List Tile
+
+
+initialModel : Model
+initialModel =
+    { current = Nothing
+    , matrix =
+        [ [ "red.png", "yellow.png", "blue.png" ]
+        , [ "orange.png", "green.png", "purple.png" ]
+        ]
+    }
+
+
+setTile : Tile -> Model -> Model
+setTile tile model =
+    { model | current = Just tile }
+
+
+removeTile : Model -> Model
+removeTile model =
+    { model | current = Nothing }

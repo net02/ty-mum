@@ -6,9 +6,12 @@ import Msg exposing (Msg)
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case ( msg, model ) of
-        ( Msg.SwitchImage, Model.Base ) ->
-            ( Model.Clean, Cmd.none )
+    case msg of
+        Msg.ShowTile tile ->
+            ( Model.setTile tile model, Cmd.none )
 
-        ( Msg.SwitchImage, Model.Clean ) ->
-            ( Model.Base, Cmd.none )
+        Msg.HideTile ->
+            ( Model.removeTile model, Cmd.none )
+
+        Msg.UpdateTile tile ->
+            ( Model.removeTile model |> Model.setTile tile, Cmd.none )
