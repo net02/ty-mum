@@ -5235,6 +5235,7 @@ var $elm$core$Basics$composeR = F3(
 			f(x));
 	});
 var $author$project$Msg$HideTile = {$: 'HideTile'};
+var $elm$core$String$append = _String_append;
 var $elm$core$String$fromFloat = _String_fromNumber;
 var $author$project$View$Mosaic$floatToPx = function (value) {
 	return $elm$core$String$fromFloat(value) + 'px';
@@ -5374,77 +5375,6 @@ var $author$project$Mosaic$tilePosition = F3(
 		var y = (cell.a * size) + element.y;
 		return _Utils_Tuple2(x, y);
 	});
-var $author$project$View$Mosaic$highligthedTile = function (_v0) {
-	var current = _v0.current;
-	var matrix = _v0.matrix;
-	var element = _v0.element;
-	var visibilityStyle = function () {
-		var _v3 = _Utils_Tuple2(current, element);
-		if ((_v3.a.$ === 'Just') && (_v3.b.$ === 'Just')) {
-			var cell = _v3.a.a;
-			var domElement = _v3.b.a;
-			return _List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'display', 'block'),
-					A2(
-					$elm$html$Html$Attributes$style,
-					'width',
-					$author$project$View$Mosaic$intToPx(
-						$elm$core$Basics$ceiling(
-							A2($author$project$Mosaic$tileSize, matrix, domElement)))),
-					A2(
-					$elm$html$Html$Attributes$style,
-					'left',
-					$author$project$View$Mosaic$floatToPx(
-						A3($author$project$Mosaic$tilePosition, cell, matrix, domElement).a)),
-					A2(
-					$elm$html$Html$Attributes$style,
-					'top',
-					$author$project$View$Mosaic$floatToPx(
-						A3($author$project$Mosaic$tilePosition, cell, matrix, domElement).b))
-				]);
-		} else {
-			return _List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'display', 'none')
-				]);
-		}
-	}();
-	var tile = function () {
-		if (current.$ === 'Just') {
-			var cell = current.a;
-			return _List_fromArray(
-				[
-					A2(
-					$elm$html$Html$img,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$src('./mosaic/tiles/test.jpg'),
-							$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onOut(
-							function (_v2) {
-								return $author$project$Msg$HideTile;
-							})
-						]),
-					_List_Nil)
-				]);
-		} else {
-			return _List_Nil;
-		}
-	}();
-	return A2(
-		$elm$html$Html$div,
-		_Utils_ap(
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$id('tile')
-				]),
-			visibilityStyle),
-		tile);
-};
-var $author$project$Msg$NoOp = {$: 'NoOp'};
-var $author$project$Msg$ShowTile = function (a) {
-	return {$: 'ShowTile', a: a};
-};
 var $elm$core$Bitwise$and = _Bitwise_and;
 var $elm$core$Bitwise$shiftRightZfBy = _Bitwise_shiftRightZfBy;
 var $elm$core$Array$bitMask = 4294967295 >>> (32 - $elm$core$Array$shiftStep);
@@ -5496,6 +5426,94 @@ var $elm$core$Maybe$withDefault = F2(
 			return _default;
 		}
 	});
+var $author$project$Mosaic$tileSrc = F2(
+	function (cell, matrix) {
+		return A2(
+			$elm$core$Maybe$withDefault,
+			'',
+			A2(
+				$elm$core$Array$get,
+				cell.b,
+				A2(
+					$elm$core$Maybe$withDefault,
+					$elm$core$Array$empty,
+					A2($elm$core$Array$get, cell.a, matrix))));
+	});
+var $author$project$View$Mosaic$highligthedTile = function (_v0) {
+	var current = _v0.current;
+	var matrix = _v0.matrix;
+	var element = _v0.element;
+	var visibilityStyle = function () {
+		var _v3 = _Utils_Tuple2(current, element);
+		if ((_v3.a.$ === 'Just') && (_v3.b.$ === 'Just')) {
+			var cell = _v3.a.a;
+			var domElement = _v3.b.a;
+			return _List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'display', 'block'),
+					A2(
+					$elm$html$Html$Attributes$style,
+					'width',
+					$author$project$View$Mosaic$intToPx(
+						$elm$core$Basics$ceiling(
+							A2($author$project$Mosaic$tileSize, matrix, domElement)))),
+					A2(
+					$elm$html$Html$Attributes$style,
+					'left',
+					$author$project$View$Mosaic$floatToPx(
+						A3($author$project$Mosaic$tilePosition, cell, matrix, domElement).a)),
+					A2(
+					$elm$html$Html$Attributes$style,
+					'top',
+					$author$project$View$Mosaic$floatToPx(
+						A3($author$project$Mosaic$tilePosition, cell, matrix, domElement).b))
+				]);
+		} else {
+			return _List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'display', 'none')
+				]);
+		}
+	}();
+	var tile = function () {
+		if (current.$ === 'Just') {
+			var cell = current.a;
+			return _List_fromArray(
+				[
+					A2(
+					$elm$html$Html$img,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$src(
+							A2(
+								$elm$core$String$append,
+								'./mosaic/tiles/',
+								A2($author$project$Mosaic$tileSrc, cell, matrix))),
+							$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onOut(
+							function (_v2) {
+								return $author$project$Msg$HideTile;
+							})
+						]),
+					_List_Nil)
+				]);
+		} else {
+			return _List_Nil;
+		}
+	}();
+	return A2(
+		$elm$html$Html$div,
+		_Utils_ap(
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$id('tile')
+				]),
+			visibilityStyle),
+		tile);
+};
+var $author$project$Msg$NoOp = {$: 'NoOp'};
+var $author$project$Msg$ShowTile = function (a) {
+	return {$: 'ShowTile', a: a};
+};
 var $author$project$Mosaic$columnsCount = function (matrix) {
 	return $elm$core$Array$length(
 		A2(
@@ -5687,73 +5705,102 @@ var $author$project$View$document = function (model) {
 		title: 'Giovanna'
 	};
 };
-var $elm$core$Array$fromListHelp = F3(
-	function (list, nodeList, nodeListSize) {
-		fromListHelp:
-		while (true) {
-			var _v0 = A2($elm$core$Elm$JsArray$initializeFromList, $elm$core$Array$branchFactor, list);
-			var jsArray = _v0.a;
-			var remainingItems = _v0.b;
-			if (_Utils_cmp(
-				$elm$core$Elm$JsArray$length(jsArray),
-				$elm$core$Array$branchFactor) < 0) {
-				return A2(
-					$elm$core$Array$builderToArray,
-					true,
-					{nodeList: nodeList, nodeListSize: nodeListSize, tail: jsArray});
-			} else {
-				var $temp$list = remainingItems,
-					$temp$nodeList = A2(
-					$elm$core$List$cons,
-					$elm$core$Array$Leaf(jsArray),
-					nodeList),
-					$temp$nodeListSize = nodeListSize + 1;
-				list = $temp$list;
-				nodeList = $temp$nodeList;
-				nodeListSize = $temp$nodeListSize;
-				continue fromListHelp;
-			}
-		}
+var $elm$core$Elm$JsArray$foldl = _JsArray_foldl;
+var $elm$core$Elm$JsArray$indexedMap = _JsArray_indexedMap;
+var $elm$core$Array$indexedMap = F2(
+	function (func, _v0) {
+		var len = _v0.a;
+		var tree = _v0.c;
+		var tail = _v0.d;
+		var initialBuilder = {
+			nodeList: _List_Nil,
+			nodeListSize: 0,
+			tail: A3(
+				$elm$core$Elm$JsArray$indexedMap,
+				func,
+				$elm$core$Array$tailIndex(len),
+				tail)
+		};
+		var helper = F2(
+			function (node, builder) {
+				if (node.$ === 'SubTree') {
+					var subTree = node.a;
+					return A3($elm$core$Elm$JsArray$foldl, helper, builder, subTree);
+				} else {
+					var leaf = node.a;
+					var offset = builder.nodeListSize * $elm$core$Array$branchFactor;
+					var mappedLeaf = $elm$core$Array$Leaf(
+						A3($elm$core$Elm$JsArray$indexedMap, func, offset, leaf));
+					return {
+						nodeList: A2($elm$core$List$cons, mappedLeaf, builder.nodeList),
+						nodeListSize: builder.nodeListSize + 1,
+						tail: builder.tail
+					};
+				}
+			});
+		return A2(
+			$elm$core$Array$builderToArray,
+			true,
+			A3($elm$core$Elm$JsArray$foldl, helper, initialBuilder, tree));
 	});
-var $elm$core$Array$fromList = function (list) {
-	if (!list.b) {
-		return $elm$core$Array$empty;
-	} else {
-		return A3($elm$core$Array$fromListHelp, list, _List_Nil, 0);
-	}
-};
-var $author$project$Model$initialModel = {
-	current: $elm$core$Maybe$Nothing,
-	element: $elm$core$Maybe$Nothing,
-	matrix: $elm$core$Array$fromList(
-		_List_fromArray(
-			[
-				$elm$core$Array$fromList(
-				_List_fromArray(
-					['red.png', 'yellow.png', 'blue.png', 'red.png', 'yellow.png', 'blue.png', 'red.png', 'yellow.png', 'blue.png', 'red.png', 'yellow.png', 'blue.png'])),
-				$elm$core$Array$fromList(
-				_List_fromArray(
-					['orange.png', 'green.png', 'purple.png', 'orange.png', 'green.png', 'purple.png', 'orange.png', 'green.png', 'purple.png', 'orange.png', 'green.png', 'purple.png'])),
-				$elm$core$Array$fromList(
-				_List_fromArray(
-					['red.png', 'yellow.png', 'blue.png', 'red.png', 'yellow.png', 'blue.png', 'red.png', 'yellow.png', 'blue.png', 'red.png', 'yellow.png', 'blue.png'])),
-				$elm$core$Array$fromList(
-				_List_fromArray(
-					['orange.png', 'green.png', 'purple.png', 'orange.png', 'green.png', 'purple.png', 'orange.png', 'green.png', 'purple.png', 'orange.png', 'green.png', 'purple.png'])),
-				$elm$core$Array$fromList(
-				_List_fromArray(
-					['red.png', 'yellow.png', 'blue.png', 'red.png', 'yellow.png', 'blue.png', 'red.png', 'yellow.png', 'blue.png', 'red.png', 'yellow.png', 'blue.png'])),
-				$elm$core$Array$fromList(
-				_List_fromArray(
-					['orange.png', 'green.png', 'purple.png', 'orange.png', 'green.png', 'purple.png', 'orange.png', 'green.png', 'purple.png', 'orange.png', 'green.png', 'purple.png'])),
-				$elm$core$Array$fromList(
-				_List_fromArray(
-					['red.png', 'yellow.png', 'blue.png', 'red.png', 'yellow.png', 'blue.png', 'red.png', 'yellow.png', 'blue.png', 'red.png', 'yellow.png', 'blue.png'])),
-				$elm$core$Array$fromList(
-				_List_fromArray(
-					['orange.png', 'green.png', 'purple.png', 'orange.png', 'green.png', 'purple.png', 'orange.png', 'green.png', 'purple.png', 'orange.png', 'green.png', 'purple.png']))
-			]))
-};
+var $elm$core$Elm$JsArray$map = _JsArray_map;
+var $elm$core$Array$map = F2(
+	function (func, _v0) {
+		var len = _v0.a;
+		var startShift = _v0.b;
+		var tree = _v0.c;
+		var tail = _v0.d;
+		var helper = function (node) {
+			if (node.$ === 'SubTree') {
+				var subTree = node.a;
+				return $elm$core$Array$SubTree(
+					A2($elm$core$Elm$JsArray$map, helper, subTree));
+			} else {
+				var values = node.a;
+				return $elm$core$Array$Leaf(
+					A2($elm$core$Elm$JsArray$map, func, values));
+			}
+		};
+		return A4(
+			$elm$core$Array$Array_elm_builtin,
+			len,
+			startShift,
+			A2($elm$core$Elm$JsArray$map, helper, tree),
+			A2($elm$core$Elm$JsArray$map, func, tail));
+	});
+var $elm$core$Array$repeat = F2(
+	function (n, e) {
+		return A2(
+			$elm$core$Array$initialize,
+			n,
+			function (_v0) {
+				return e;
+			});
+	});
+var $author$project$Model$initialModel = function () {
+	var indexToFilename = F2(
+		function (index, innerArray) {
+			return A2(
+				$elm$core$Array$map,
+				function (s) {
+					return $elm$core$String$fromInt(index) + ('_' + s);
+				},
+				innerArray);
+		});
+	var matrix = A2(
+		$elm$core$Array$indexedMap,
+		indexToFilename,
+		A2(
+			$elm$core$Array$repeat,
+			8,
+			A2(
+				$elm$core$Array$initialize,
+				12,
+				function (n) {
+					return $elm$core$String$fromInt(n) + '.jpg';
+				})));
+	return {current: $elm$core$Maybe$Nothing, element: $elm$core$Maybe$Nothing, matrix: matrix};
+}();
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $elm$browser$Browser$Events$Window = {$: 'Window'};

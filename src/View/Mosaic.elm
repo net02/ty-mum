@@ -48,7 +48,7 @@ highligthedTile { current, matrix, element } =
             case current of
                 Just cell ->
                     [ img
-                        [ src "./mosaic/tiles/test.jpg"
+                        [ src (matrix |> tileSrc cell |> String.append "./mosaic/tiles/")
                         , Mouse.onOut (\_ -> Msg.HideTile)
                         ]
                         []

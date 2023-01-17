@@ -3,6 +3,7 @@ module Mosaic exposing
     , isSameTile
     , tilePosition
     , tileSize
+    , tileSrc
     )
 
 import Array exposing (Array)
@@ -57,6 +58,15 @@ tilePosition cell matrix element =
             (cell |> Tuple.first |> toFloat) * size + element.y
     in
     ( x, y )
+
+
+tileSrc : Cell -> Matrix -> String
+tileSrc cell matrix =
+    matrix
+        |> Array.get (Tuple.first cell)
+        |> Maybe.withDefault Array.empty
+        |> Array.get (Tuple.second cell)
+        |> Maybe.withDefault ""
 
 
 rowsCount : Matrix -> Int
