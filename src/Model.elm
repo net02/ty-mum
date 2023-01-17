@@ -5,6 +5,7 @@ import Array exposing (Array)
 
 type alias Model =
     { current : Maybe Cell
+    , display : Bool
     , matrix : Matrix
     , element : Maybe DomElement
     }
@@ -51,10 +52,11 @@ initialModel =
 
         matrix =
             Array.initialize 12 (\n -> String.fromInt n ++ ".jpg")
-            |> Array.repeat 8
-            |> Array.indexedMap indexToFilename
+                |> Array.repeat 8
+                |> Array.indexedMap indexToFilename
     in
     { current = Nothing
+    , display = False
     , matrix = matrix
     , element = Nothing
     }
@@ -65,9 +67,14 @@ setTile cell model =
     { model | current = Just cell }
 
 
+showTile : Model -> Model
+showTile model =
+    { model | display = True }
+
+
 removeTile : Model -> Model
 removeTile model =
-    { model | current = Nothing }
+    { model | current = Nothing, display = False }
 
 
 setElement : DomElement -> Model -> Model

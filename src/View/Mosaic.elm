@@ -12,11 +12,6 @@ import Msg exposing (Msg)
 
 view : Model -> List (Html Msg)
 view model =
-    let
-        onLoad : Msg -> Attribute Msg
-        onLoad message =
-            on "load" (Decode.succeed message)
-    in
     [ img
         [ src "./mosaic/base.png"
         , onLoad Msg.UpdateMosaicSize
@@ -30,12 +25,19 @@ view model =
 
 
 highligthedTile : Model -> Html Msg
-highligthedTile { current, matrix, element } =
+highligthedTile { current, display, matrix, element } =
     let
+        displayValue =
+            if display then
+                "block"
+
+            else
+                "none"
+
         visibilityStyle =
             case ( current, element ) of
                 ( Just cell, Just domElement ) ->
-                    [ style "display" "block"
+                    [ style "display" displayValue
                     , domElement |> Mosaic.tileSize matrix |> ceiling |> intToPx |> style "width"
                     , domElement |> Mosaic.tilePosition cell matrix |> Tuple.first |> floatToPx |> style "left"
                     , domElement |> Mosaic.tilePosition cell matrix |> Tuple.second |> floatToPx |> style "top"
@@ -49,6 +51,7 @@ highligthedTile { current, matrix, element } =
                 Just cell ->
                     [ img
                         [ src (matrix |> tileSrc cell |> String.append "./mosaic/tiles/")
+                        , onLoad Msg.ShowTile
                         , Mouse.onOut (\_ -> Msg.HideTile)
                         ]
                         []
@@ -68,10 +71,15 @@ maybeUpdateTile model coords =
     else
         case Mosaic.cellFromCoords coords model of
             Just tile ->
-                Msg.ShowTile tile
+                Msg.LoadTile tile
 
             Nothing ->
                 Msg.HideTile
+
+
+onLoad : Msg -> Attribute Msg
+onLoad message =
+    on "load" (Decode.succeed message)
 
 
 floatToPx : Float -> String

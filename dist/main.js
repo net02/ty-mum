@@ -5235,6 +5235,7 @@ var $elm$core$Basics$composeR = F3(
 			f(x));
 	});
 var $author$project$Msg$HideTile = {$: 'HideTile'};
+var $author$project$Msg$ShowTile = {$: 'ShowTile'};
 var $elm$core$String$append = _String_append;
 var $elm$core$String$fromFloat = _String_fromNumber;
 var $author$project$View$Mosaic$floatToPx = function (value) {
@@ -5243,11 +5244,27 @@ var $author$project$View$Mosaic$floatToPx = function (value) {
 var $author$project$View$Mosaic$intToPx = function (value) {
 	return $elm$core$String$fromInt(value) + 'px';
 };
+var $elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 'Normal', a: a};
+};
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var $elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var $author$project$View$Mosaic$onLoad = function (message) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'load',
+		$elm$json$Json$Decode$succeed(message));
+};
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$defaultOptions = {preventDefault: true, stopPropagation: false};
 var $elm$virtual_dom$VirtualDom$Custom = function (a) {
 	return {$: 'Custom', a: a};
 };
-var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
 var $elm$html$Html$Events$custom = F2(
 	function (event, decoder) {
 		return A2(
@@ -5441,16 +5458,44 @@ var $author$project$Mosaic$tileSrc = F2(
 	});
 var $author$project$View$Mosaic$highligthedTile = function (_v0) {
 	var current = _v0.current;
+	var display = _v0.display;
 	var matrix = _v0.matrix;
 	var element = _v0.element;
-	var visibilityStyle = function () {
-		var _v3 = _Utils_Tuple2(current, element);
-		if ((_v3.a.$ === 'Just') && (_v3.b.$ === 'Just')) {
-			var cell = _v3.a.a;
-			var domElement = _v3.b.a;
+	var tile = function () {
+		if (current.$ === 'Just') {
+			var cell = current.a;
 			return _List_fromArray(
 				[
-					A2($elm$html$Html$Attributes$style, 'display', 'block'),
+					A2(
+					$elm$html$Html$img,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$src(
+							A2(
+								$elm$core$String$append,
+								'./mosaic/tiles/',
+								A2($author$project$Mosaic$tileSrc, cell, matrix))),
+							$author$project$View$Mosaic$onLoad($author$project$Msg$ShowTile),
+							$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onOut(
+							function (_v3) {
+								return $author$project$Msg$HideTile;
+							})
+						]),
+					_List_Nil)
+				]);
+		} else {
+			return _List_Nil;
+		}
+	}();
+	var displayValue = display ? 'block' : 'none';
+	var visibilityStyle = function () {
+		var _v1 = _Utils_Tuple2(current, element);
+		if ((_v1.a.$ === 'Just') && (_v1.b.$ === 'Just')) {
+			var cell = _v1.a.a;
+			var domElement = _v1.b.a;
+			return _List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'display', displayValue),
 					A2(
 					$elm$html$Html$Attributes$style,
 					'width',
@@ -5475,31 +5520,6 @@ var $author$project$View$Mosaic$highligthedTile = function (_v0) {
 				]);
 		}
 	}();
-	var tile = function () {
-		if (current.$ === 'Just') {
-			var cell = current.a;
-			return _List_fromArray(
-				[
-					A2(
-					$elm$html$Html$img,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$src(
-							A2(
-								$elm$core$String$append,
-								'./mosaic/tiles/',
-								A2($author$project$Mosaic$tileSrc, cell, matrix))),
-							$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onOut(
-							function (_v2) {
-								return $author$project$Msg$HideTile;
-							})
-						]),
-					_List_Nil)
-				]);
-		} else {
-			return _List_Nil;
-		}
-	}();
 	return A2(
 		$elm$html$Html$div,
 		_Utils_ap(
@@ -5510,10 +5530,10 @@ var $author$project$View$Mosaic$highligthedTile = function (_v0) {
 			visibilityStyle),
 		tile);
 };
-var $author$project$Msg$NoOp = {$: 'NoOp'};
-var $author$project$Msg$ShowTile = function (a) {
-	return {$: 'ShowTile', a: a};
+var $author$project$Msg$LoadTile = function (a) {
+	return {$: 'LoadTile', a: a};
 };
+var $author$project$Msg$NoOp = {$: 'NoOp'};
 var $author$project$Mosaic$columnsCount = function (matrix) {
 	return $elm$core$Array$length(
 		A2(
@@ -5556,31 +5576,15 @@ var $author$project$View$Mosaic$maybeUpdateTile = F2(
 			var _v0 = A2($author$project$Mosaic$cellFromCoords, coords, model);
 			if (_v0.$ === 'Just') {
 				var tile = _v0.a;
-				return $author$project$Msg$ShowTile(tile);
+				return $author$project$Msg$LoadTile(tile);
 			} else {
 				return $author$project$Msg$HideTile;
 			}
 		}
 	});
-var $elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 'Normal', a: a};
-};
-var $elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$Normal(decoder));
-	});
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onMove = A2($mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onWithOptions, 'mousemove', $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$defaultOptions);
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onOver = A2($mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onWithOptions, 'mouseover', $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$defaultOptions);
 var $author$project$View$Mosaic$view = function (model) {
-	var onLoad = function (message) {
-		return A2(
-			$elm$html$Html$Events$on,
-			'load',
-			$elm$json$Json$Decode$succeed(message));
-	};
 	return _List_fromArray(
 		[
 			A2(
@@ -5588,7 +5592,7 @@ var $author$project$View$Mosaic$view = function (model) {
 			_List_fromArray(
 				[
 					$elm$html$Html$Attributes$src('./mosaic/base.png'),
-					onLoad($author$project$Msg$UpdateMosaicSize),
+					$author$project$View$Mosaic$onLoad($author$project$Msg$UpdateMosaicSize),
 					$elm$html$Html$Attributes$id('mosaic'),
 					$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onMove(
 					A2(
@@ -5799,7 +5803,7 @@ var $author$project$Model$initialModel = function () {
 				function (n) {
 					return $elm$core$String$fromInt(n) + '.jpg';
 				})));
-	return {current: $elm$core$Maybe$Nothing, element: $elm$core$Maybe$Nothing, matrix: matrix};
+	return {current: $elm$core$Maybe$Nothing, display: false, element: $elm$core$Maybe$Nothing, matrix: matrix};
 }();
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -6255,7 +6259,7 @@ var $elm$browser$Browser$Dom$getElement = _Browser_getElement;
 var $author$project$Model$removeTile = function (model) {
 	return _Utils_update(
 		model,
-		{current: $elm$core$Maybe$Nothing});
+		{current: $elm$core$Maybe$Nothing, display: false});
 };
 var $author$project$Model$setElement = F2(
 	function (element, model) {
@@ -6273,9 +6277,14 @@ var $author$project$Model$setTile = F2(
 				current: $elm$core$Maybe$Just(cell)
 			});
 	});
+var $author$project$Model$showTile = function (model) {
+	return _Utils_update(
+		model,
+		{display: true});
+};
 var $author$project$Update$update = F2(
 	function (msg, model) {
-		_v0$4:
+		_v0$5:
 		while (true) {
 			switch (msg.$) {
 				case 'UpdateMosaicSize':
@@ -6292,19 +6301,23 @@ var $author$project$Update$update = F2(
 							A2($author$project$Model$setElement, element.element, model),
 							$elm$core$Platform$Cmd$none);
 					} else {
-						break _v0$4;
+						break _v0$5;
 					}
-				case 'ShowTile':
+				case 'LoadTile':
 					var tile = msg.a;
 					return _Utils_Tuple2(
 						A2($author$project$Model$setTile, tile, model),
+						$elm$core$Platform$Cmd$none);
+				case 'ShowTile':
+					return _Utils_Tuple2(
+						$author$project$Model$showTile(model),
 						$elm$core$Platform$Cmd$none);
 				case 'HideTile':
 					return _Utils_Tuple2(
 						$author$project$Model$removeTile(model),
 						$elm$core$Platform$Cmd$none);
 				default:
-					break _v0$4;
+					break _v0$5;
 			}
 		}
 		return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);

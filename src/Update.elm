@@ -22,8 +22,11 @@ update msg model =
         Msg.GotDomElement (Ok element) ->
             ( Model.setElement element.element model, Cmd.none )
 
-        Msg.ShowTile tile ->
+        Msg.LoadTile tile ->
             ( Model.setTile tile model, Cmd.none )
+
+        Msg.ShowTile ->
+            ( Model.showTile model, Cmd.none )
 
         Msg.HideTile ->
             ( Model.removeTile model, Cmd.none )

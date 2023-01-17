@@ -8,5 +8,6 @@ type Msg
     = NoOp
     | UpdateMosaicSize
     | GotDomElement (Result Dom.Error Dom.Element)
-    | ShowTile Cell
+    | LoadTile Cell
+    | ShowTile
     | HideTile
