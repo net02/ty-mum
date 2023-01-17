@@ -1,6 +1,7 @@
 module Model exposing (..)
 
 import Array exposing (Array)
+import Bootstrap.Modal as Modal
 
 
 type alias Model =
@@ -8,6 +9,7 @@ type alias Model =
     , display : Bool
     , matrix : Matrix
     , element : Maybe DomElement
+    , modalVisibility : Modal.Visibility
     }
 
 
@@ -59,6 +61,7 @@ initialModel =
     , display = False
     , matrix = matrix
     , element = Nothing
+    , modalVisibility = Modal.hidden
     }
 
 
@@ -72,11 +75,25 @@ showTile model =
     { model | display = True }
 
 
-removeTile : Model -> Model
-removeTile model =
-    { model | current = Nothing, display = False }
+maybeRemoveTile : Model -> Model
+maybeRemoveTile model =
+    if model.modalVisibility == Modal.shown then
+        model
+
+    else
+        { model | current = Nothing, display = False }
 
 
 setElement : DomElement -> Model -> Model
 setElement element model =
     { model | element = Just element }
+
+
+openModal : Model -> Model
+openModal model =
+    { model | modalVisibility = Modal.shown }
+
+
+closeModal : Model -> Model
+closeModal model =
+    { model | modalVisibility = Modal.hidden }

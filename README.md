@@ -18,7 +18,7 @@ A static, single page application website to honour my mother
 TODOs, nice-to-have and ideas
 
 - [x] add on-hover pop-up effect on single photos
-- [ ] add zoom-in modal on single photos
+- [x] add zoom-in modal on single photos
 - [ ] with a carousel, *blackjack and hookers!*
 - [ ] switch photos from cropped to full size original image
 - [ ] use a deploy script to compile in prod mode & manage assets

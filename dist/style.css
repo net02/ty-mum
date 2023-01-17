@@ -23,6 +23,32 @@ a:hover {
 .footer { margin-bottom: 10px; }
 .footer p { text-align: center; }
 
+.modal-content {
+  background-color: #21232a;
+  width: auto;
+  margin: 0 auto;
+}
+.modal-content .modal-body {
+  padding: 5px;
+}
+.modal-content .modal-body img {
+  max-width: 100%;
+}
+.modal-backdrop.show {
+  opacity: 0.7;
+}
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 90%;
+    margin: 5px auto;
+  }
+}
+@media (min-width: 992px) {
+  .modal-lg {
+    max-width: 90%;
+  }
+}
+
 /* Elements */
 img#mosaic {
   display: block;
@@ -36,7 +62,7 @@ img#mosaic {
   position: absolute;
 }
 #tile img {
-  width: 100%;  
+  width: 100%;
 }
 
 #author {

@@ -8,13 +8,6 @@ import Task
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    -- let
-    --     _ =
-    --         Debug.log "have" model
-    --
-    --     _ =
-    --         Debug.log "got" msg
-    -- in
     case msg of
         Msg.UpdateMosaicSize ->
             ( model, Dom.getElement "mosaic" |> Task.attempt Msg.GotDomElement )
@@ -29,7 +22,13 @@ update msg model =
             ( Model.showTile model, Cmd.none )
 
         Msg.HideTile ->
-            ( Model.removeTile model, Cmd.none )
+            ( Model.maybeRemoveTile model, Cmd.none )
+
+        Msg.CloseModal ->
+            ( Model.closeModal model, Cmd.none )
+
+        Msg.OpenModal ->
+            ( Model.openModal model, Cmd.none )
 
         _ ->
             ( model, Cmd.none )

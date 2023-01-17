@@ -1,8 +1,10 @@
 module View exposing (document)
 
+import Bootstrap.Modal as Modal
 import Browser exposing (Document)
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (onClick)
 import Model exposing (Model)
 import Msg exposing (Msg)
 import View.Mosaic as Mosaic
@@ -32,5 +34,11 @@ body model =
             , a [ target "_blank", href "https://github.com/net02/ty-mum" ]
                 [ img [ src "https://github.githubassets.com/images/modules/site/icons/footer/github-mark.svg", align "middle", alt "on github", title "on github" ] [] ]
             ]
+        ]
+    , div []
+        [ Modal.config Msg.CloseModal
+            |> Modal.large
+            |> Modal.body [] [ Mosaic.tileImage model [ onClick Msg.CloseModal ] ]
+            |> Modal.view model.modalVisibility
         ]
     ]

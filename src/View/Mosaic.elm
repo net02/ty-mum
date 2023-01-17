@@ -1,12 +1,12 @@
-module View.Mosaic exposing (view)
+module View.Mosaic exposing (tileImage, view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (on)
+import Html.Events exposing (on, onClick)
 import Html.Events.Extra.Mouse as Mouse
 import Json.Decode as Decode
 import Model exposing (Model)
-import Mosaic exposing (..)
+import Mosaic
 import Msg exposing (Msg)
 
 
@@ -25,42 +25,49 @@ view model =
 
 
 highligthedTile : Model -> Html Msg
-highligthedTile { current, display, matrix, element } =
+highligthedTile model =
     let
         displayValue =
-            if display then
+            if model.display then
                 "block"
 
             else
                 "none"
 
         visibilityStyle =
-            case ( current, element ) of
+            case ( model.current, model.element ) of
                 ( Just cell, Just domElement ) ->
                     [ style "display" displayValue
-                    , domElement |> Mosaic.tileSize matrix |> ceiling |> intToPx |> style "width"
-                    , domElement |> Mosaic.tilePosition cell matrix |> Tuple.first |> floatToPx |> style "left"
-                    , domElement |> Mosaic.tilePosition cell matrix |> Tuple.second |> floatToPx |> style "top"
+                    , domElement |> Mosaic.tileSize model.matrix |> ceiling |> intToPx |> style "width"
+                    , domElement |> Mosaic.tilePosition cell model.matrix |> Tuple.first |> floatToPx |> style "left"
+                    , domElement |> Mosaic.tilePosition cell model.matrix |> Tuple.second |> floatToPx |> style "top"
                     ]
 
                 _ ->
                     [ style "display" "none" ]
 
         tile =
-            case current of
-                Just cell ->
-                    [ img
-                        [ src (matrix |> tileSrc cell |> String.append "./mosaic/tiles/")
-                        , onLoad Msg.ShowTile
-                        , Mouse.onOut (\_ -> Msg.HideTile)
-                        ]
-                        []
-                    ]
-
-                Nothing ->
-                    []
+            tileImage model
+                [ onLoad Msg.ShowTile
+                , onClick Msg.OpenModal
+                , Mouse.onOut (\_ -> Msg.HideTile)
+                ]
     in
-    div ([ id "tile" ] ++ visibilityStyle) tile
+    div ([ id "tile" ] ++ visibilityStyle) [ tile ]
+
+
+tileImage : Model -> List (Attribute Msg) -> Html Msg
+tileImage { current, matrix } attributes =
+    let
+        imageSrc cell =
+            src (matrix |> Mosaic.tileSrc cell |> String.append "./mosaic/tiles/")
+    in
+    case current of
+        Just cell ->
+            img ([ imageSrc cell ] ++ attributes) []
+
+        Nothing ->
+            text ""
 
 
 maybeUpdateTile : Model -> Model.Coordinates -> Msg
