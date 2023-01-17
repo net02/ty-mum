@@ -4,25 +4,20 @@ import Browser exposing (Document)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Model exposing (Model)
-import Msg
+import Msg exposing (Msg)
+import View.Mosaic as Mosaic
 
 
-document : Model -> Document Msg.Msg
+document : Model -> Document Msg
 document model =
     { title = "Giovanna"
     , body = body model
     }
 
 
-body : Model -> List (Html Msg.Msg)
+body : Model -> List (Html Msg)
 body model =
-    [ div [ class "main" ]
-        [ img
-            [ src "./mosaic/base.png"
-            , id "mosaic"
-            ]
-            []
-        ]
+    [ div [ class "main" ] (Mosaic.view model)
     , div [ class "footer" ]
         [ p []
             [ text "Affamato? "

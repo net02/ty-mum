@@ -1,9 +1,12 @@
 module Msg exposing (..)
 
-import Model exposing (Tile)
+import Browser.Dom as Dom
+import Model exposing (Cell)
 
 
 type Msg
-    = ShowTile Tile
+    = NoOp
+    | UpdateMosaicSize
+    | GotDomElement (Result Dom.Error Dom.Element)
+    | ShowTile Cell
     | HideTile
-    | UpdateTile Tile
