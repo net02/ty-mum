@@ -11,3 +11,5 @@ type Msg
     | LoadTile Cell
     | ShowTile
     | HideTile
+    | OpenModal
+    | CloseModal

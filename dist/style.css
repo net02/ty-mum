@@ -21,28 +21,53 @@ a:hover {
 .main { margin: 10px 0; }
 
 .footer { margin-bottom: 10px; }
-.footer p { text-align: center; }
+
+.modal-content {
+  background-color: #21232a;
+  width: auto;
+  margin: 0 auto;
+}
+.modal-content .modal-body {
+  padding: 5px;
+}
+.modal-content .modal-body img {
+  max-width: 100%;
+}
+.modal-backdrop.show {
+  opacity: 0.7;
+}
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 90%;
+    margin: 5px auto;
+  }
+}
+@media (min-width: 992px) {
+  .modal-lg {
+    max-width: 90%;
+  }
+}
 
 /* Elements */
 img#mosaic {
-  display: block;
   max-height: 90vh;
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
+}
+@media (max-aspect-ratio: 2/3) and (max-width: 991px) {
+  img#mosaic {
+    margin-top: 20vh;
+  }
 }
 
 #tile {
   position: absolute;
 }
 #tile img {
-  width: 100%;  
+  width: 100%;
 }
 
 #author {
   font-size: 12px;
   color: #999999;
-  text-align: center;
 }
 #author img {
   width: 24px;

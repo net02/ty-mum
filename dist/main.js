@@ -5196,6 +5196,7 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$document = _Browser_document;
+var $author$project$Msg$CloseModal = {$: 'CloseModal'};
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
@@ -5207,8 +5208,61 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$align = $elm$html$Html$Attributes$stringProperty('align');
 var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
+var $rundis$elm_bootstrap$Bootstrap$Modal$Body = function (a) {
+	return {$: 'Body', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$Config = function (a) {
+	return {$: 'Config', a: a};
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$body = F3(
+	function (attributes, children, _v0) {
+		var conf = _v0.a;
+		return $rundis$elm_bootstrap$Bootstrap$Modal$Config(
+			_Utils_update(
+				conf,
+				{
+					body: $elm$core$Maybe$Just(
+						$rundis$elm_bootstrap$Bootstrap$Modal$Body(
+							{attributes: attributes, children: children}))
+				}));
+	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $rundis$elm_bootstrap$Bootstrap$Modal$config = function (closeMsg) {
+	return $rundis$elm_bootstrap$Bootstrap$Modal$Config(
+		{
+			body: $elm$core$Maybe$Nothing,
+			closeMsg: closeMsg,
+			footer: $elm$core$Maybe$Nothing,
+			header: $elm$core$Maybe$Nothing,
+			options: {attrs: _List_Nil, centered: true, hideOnBackdropClick: true, modalSize: $elm$core$Maybe$Nothing, scrollableBody: false},
+			withAnimation: $elm$core$Maybe$Nothing
+		});
+};
 var $elm$html$Html$div = _VirtualDom_node('div');
+var $rundis$elm_bootstrap$Bootstrap$Grid$container = F2(
+	function (attributes, children) {
+		return A2(
+			$elm$html$Html$div,
+			_Utils_ap(
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('container')
+					]),
+				attributes),
+			children);
+	});
+var $rundis$elm_bootstrap$Bootstrap$Grid$containerFluid = F2(
+	function (attributes, children) {
+		return A2(
+			$elm$html$Html$div,
+			_Utils_ap(
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('container-fluid')
+					]),
+				attributes),
+			children);
+	});
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -5217,32 +5271,20 @@ var $elm$html$Html$Attributes$href = function (url) {
 };
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$img = _VirtualDom_node('img');
-var $elm$html$Html$p = _VirtualDom_node('p');
-var $elm$html$Html$Attributes$src = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'src',
-		_VirtualDom_noJavaScriptOrHtmlUri(url));
-};
-var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $elm$html$Html$Attributes$title = $elm$html$Html$Attributes$stringProperty('title');
-var $author$project$Msg$UpdateMosaicSize = {$: 'UpdateMosaicSize'};
-var $elm$core$Basics$composeR = F3(
-	function (f, g, x) {
-		return g(
-			f(x));
-	});
-var $author$project$Msg$HideTile = {$: 'HideTile'};
-var $author$project$Msg$ShowTile = {$: 'ShowTile'};
-var $elm$core$String$append = _String_append;
-var $elm$core$String$fromFloat = _String_fromNumber;
-var $author$project$View$Mosaic$floatToPx = function (value) {
-	return $elm$core$String$fromFloat(value) + 'px';
-};
-var $author$project$View$Mosaic$intToPx = function (value) {
-	return $elm$core$String$fromInt(value) + 'px';
+var $rundis$elm_bootstrap$Bootstrap$General$Internal$LG = {$: 'LG'};
+var $rundis$elm_bootstrap$Bootstrap$Modal$large = function (_v0) {
+	var conf = _v0.a;
+	var options = conf.options;
+	return $rundis$elm_bootstrap$Bootstrap$Modal$Config(
+		_Utils_update(
+			conf,
+			{
+				options: _Utils_update(
+					options,
+					{
+						modalSize: $elm$core$Maybe$Just($rundis$elm_bootstrap$Bootstrap$General$Internal$LG)
+					})
+			}));
 };
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
@@ -5255,6 +5297,547 @@ var $elm$html$Html$Events$on = F2(
 			event,
 			$elm$virtual_dom$VirtualDom$Normal(decoder));
 	});
+var $elm$html$Html$Events$onClick = function (msg) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'click',
+		$elm$json$Json$Decode$succeed(msg));
+};
+var $elm$html$Html$p = _VirtualDom_node('p');
+var $elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
+var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $elm$core$String$append = _String_append;
+var $elm$core$Bitwise$and = _Bitwise_and;
+var $elm$core$Bitwise$shiftRightZfBy = _Bitwise_shiftRightZfBy;
+var $elm$core$Array$bitMask = 4294967295 >>> (32 - $elm$core$Array$shiftStep);
+var $elm$core$Basics$ge = _Utils_ge;
+var $elm$core$Elm$JsArray$unsafeGet = _JsArray_unsafeGet;
+var $elm$core$Array$getHelp = F3(
+	function (shift, index, tree) {
+		getHelp:
+		while (true) {
+			var pos = $elm$core$Array$bitMask & (index >>> shift);
+			var _v0 = A2($elm$core$Elm$JsArray$unsafeGet, pos, tree);
+			if (_v0.$ === 'SubTree') {
+				var subTree = _v0.a;
+				var $temp$shift = shift - $elm$core$Array$shiftStep,
+					$temp$index = index,
+					$temp$tree = subTree;
+				shift = $temp$shift;
+				index = $temp$index;
+				tree = $temp$tree;
+				continue getHelp;
+			} else {
+				var values = _v0.a;
+				return A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, values);
+			}
+		}
+	});
+var $elm$core$Bitwise$shiftLeftBy = _Bitwise_shiftLeftBy;
+var $elm$core$Array$tailIndex = function (len) {
+	return (len >>> 5) << 5;
+};
+var $elm$core$Array$get = F2(
+	function (index, _v0) {
+		var len = _v0.a;
+		var startShift = _v0.b;
+		var tree = _v0.c;
+		var tail = _v0.d;
+		return ((index < 0) || (_Utils_cmp(index, len) > -1)) ? $elm$core$Maybe$Nothing : ((_Utils_cmp(
+			index,
+			$elm$core$Array$tailIndex(len)) > -1) ? $elm$core$Maybe$Just(
+			A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, tail)) : $elm$core$Maybe$Just(
+			A3($elm$core$Array$getHelp, startShift, index, tree)));
+	});
+var $elm$core$Tuple$second = function (_v0) {
+	var y = _v0.b;
+	return y;
+};
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var $author$project$Mosaic$tileSrc = F2(
+	function (cell, matrix) {
+		return A2(
+			$elm$core$Maybe$withDefault,
+			'',
+			A2(
+				$elm$core$Array$get,
+				cell.b,
+				A2(
+					$elm$core$Maybe$withDefault,
+					$elm$core$Array$empty,
+					A2($elm$core$Array$get, cell.a, matrix))));
+	});
+var $author$project$View$Mosaic$tileImage = F2(
+	function (_v0, attributes) {
+		var current = _v0.current;
+		var matrix = _v0.matrix;
+		var imageSrc = function (cell) {
+			return $elm$html$Html$Attributes$src(
+				A2(
+					$elm$core$String$append,
+					'./mosaic/tiles/',
+					A2($author$project$Mosaic$tileSrc, cell, matrix)));
+		};
+		if (current.$ === 'Just') {
+			var cell = current.a;
+			return A2(
+				$elm$html$Html$img,
+				_Utils_ap(
+					_List_fromArray(
+						[
+							imageSrc(cell)
+						]),
+					attributes),
+				_List_Nil);
+		} else {
+			return $elm$html$Html$text('');
+		}
+	});
+var $elm$html$Html$Attributes$title = $elm$html$Html$Attributes$stringProperty('title');
+var $elm$virtual_dom$VirtualDom$attribute = F2(
+	function (key, value) {
+		return A2(
+			_VirtualDom_attribute,
+			_VirtualDom_noOnOrFormAction(key),
+			_VirtualDom_noJavaScriptOrHtmlUri(value));
+	});
+var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
+var $elm$html$Html$Attributes$classList = function (classes) {
+	return $elm$html$Html$Attributes$class(
+		A2(
+			$elm$core$String$join,
+			' ',
+			A2(
+				$elm$core$List$map,
+				$elm$core$Tuple$first,
+				A2($elm$core$List$filter, $elm$core$Tuple$second, classes))));
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$StartClose = {$: 'StartClose'};
+var $rundis$elm_bootstrap$Bootstrap$Modal$getCloseMsg = function (config_) {
+	var _v0 = config_.withAnimation;
+	if (_v0.$ === 'Just') {
+		var animationMsg = _v0.a;
+		return animationMsg($rundis$elm_bootstrap$Bootstrap$Modal$StartClose);
+	} else {
+		return config_.closeMsg;
+	}
+};
+var $elm$core$Maybe$map = F2(
+	function (f, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return $elm$core$Maybe$Just(
+				f(value));
+		} else {
+			return $elm$core$Maybe$Nothing;
+		}
+	});
+var $rundis$elm_bootstrap$Bootstrap$Modal$isFade = function (conf) {
+	return A2(
+		$elm$core$Maybe$withDefault,
+		false,
+		A2(
+			$elm$core$Maybe$map,
+			function (_v0) {
+				return true;
+			},
+			conf.withAnimation));
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$backdrop = F2(
+	function (visibility, conf) {
+		var attributes = function () {
+			switch (visibility.$) {
+				case 'Show':
+					return _Utils_ap(
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$classList(
+								_List_fromArray(
+									[
+										_Utils_Tuple2('modal-backdrop', true),
+										_Utils_Tuple2(
+										'fade',
+										$rundis$elm_bootstrap$Bootstrap$Modal$isFade(conf)),
+										_Utils_Tuple2('show', true)
+									]))
+							]),
+						conf.options.hideOnBackdropClick ? _List_fromArray(
+							[
+								$elm$html$Html$Events$onClick(
+								$rundis$elm_bootstrap$Bootstrap$Modal$getCloseMsg(conf))
+							]) : _List_Nil);
+				case 'StartClose':
+					return _List_fromArray(
+						[
+							$elm$html$Html$Attributes$classList(
+							_List_fromArray(
+								[
+									_Utils_Tuple2('modal-backdrop', true),
+									_Utils_Tuple2('fade', true),
+									_Utils_Tuple2('show', true)
+								]))
+						]);
+				case 'FadeClose':
+					return _List_fromArray(
+						[
+							$elm$html$Html$Attributes$classList(
+							_List_fromArray(
+								[
+									_Utils_Tuple2('modal-backdrop', true),
+									_Utils_Tuple2('fade', true),
+									_Utils_Tuple2('show', false)
+								]))
+						]);
+				default:
+					return _List_fromArray(
+						[
+							$elm$html$Html$Attributes$classList(
+							_List_fromArray(
+								[
+									_Utils_Tuple2('modal-backdrop', false),
+									_Utils_Tuple2(
+									'fade',
+									$rundis$elm_bootstrap$Bootstrap$Modal$isFade(conf)),
+									_Utils_Tuple2('show', false)
+								]))
+						]);
+			}
+		}();
+		return _List_fromArray(
+			[
+				A2($elm$html$Html$div, attributes, _List_Nil)
+			]);
+	});
+var $elm$json$Json$Decode$andThen = _Json_andThen;
+var $elm$json$Json$Decode$field = _Json_decodeField;
+var $elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+	});
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$className = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['className']),
+	$elm$json$Json$Decode$string);
+var $elm$json$Json$Decode$fail = _Json_fail;
+var $rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$target = function (decoder) {
+	return A2($elm$json$Json$Decode$field, 'target', decoder);
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$containerClickDecoder = function (closeMsg) {
+	return A2(
+		$elm$json$Json$Decode$andThen,
+		function (c) {
+			return A2($elm$core$String$contains, 'elm-bootstrap-modal', c) ? $elm$json$Json$Decode$succeed(closeMsg) : $elm$json$Json$Decode$fail('ignoring');
+		},
+		$rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$target($rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$className));
+};
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $rundis$elm_bootstrap$Bootstrap$Modal$display = F2(
+	function (visibility, conf) {
+		switch (visibility.$) {
+			case 'Show':
+				return _List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'pointer-events', 'none'),
+						A2($elm$html$Html$Attributes$style, 'display', 'block'),
+						$elm$html$Html$Attributes$classList(
+						_List_fromArray(
+							[
+								_Utils_Tuple2('modal', true),
+								_Utils_Tuple2(
+								'fade',
+								$rundis$elm_bootstrap$Bootstrap$Modal$isFade(conf)),
+								_Utils_Tuple2('show', true)
+							]))
+					]);
+			case 'StartClose':
+				return _List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'pointer-events', 'none'),
+						A2($elm$html$Html$Attributes$style, 'display', 'block'),
+						$elm$html$Html$Attributes$classList(
+						_List_fromArray(
+							[
+								_Utils_Tuple2('modal', true),
+								_Utils_Tuple2('fade', true),
+								_Utils_Tuple2('show', true)
+							]))
+					]);
+			case 'FadeClose':
+				return _List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'pointer-events', 'none'),
+						A2($elm$html$Html$Attributes$style, 'display', 'block'),
+						$elm$html$Html$Attributes$classList(
+						_List_fromArray(
+							[
+								_Utils_Tuple2('modal', true),
+								_Utils_Tuple2('fade', true),
+								_Utils_Tuple2('show', false)
+							])),
+						A2(
+						$elm$html$Html$Events$on,
+						'transitionend',
+						$elm$json$Json$Decode$succeed(conf.closeMsg))
+					]);
+			default:
+				return _List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'height', '0px'),
+						A2($elm$html$Html$Attributes$style, 'display', 'block'),
+						$elm$html$Html$Attributes$classList(
+						_List_fromArray(
+							[
+								_Utils_Tuple2('modal', true),
+								_Utils_Tuple2(
+								'fade',
+								$rundis$elm_bootstrap$Bootstrap$Modal$isFade(conf)),
+								_Utils_Tuple2('show', false)
+							]))
+					]);
+		}
+	});
+var $elm$core$List$maybeCons = F3(
+	function (f, mx, xs) {
+		var _v0 = f(mx);
+		if (_v0.$ === 'Just') {
+			var x = _v0.a;
+			return A2($elm$core$List$cons, x, xs);
+		} else {
+			return xs;
+		}
+	});
+var $elm$core$List$filterMap = F2(
+	function (f, xs) {
+		return A3(
+			$elm$core$List$foldr,
+			$elm$core$List$maybeCons(f),
+			_List_Nil,
+			xs);
+	});
+var $rundis$elm_bootstrap$Bootstrap$General$Internal$screenSizeOption = function (size) {
+	switch (size.$) {
+		case 'XS':
+			return $elm$core$Maybe$Nothing;
+		case 'SM':
+			return $elm$core$Maybe$Just('sm');
+		case 'MD':
+			return $elm$core$Maybe$Just('md');
+		case 'LG':
+			return $elm$core$Maybe$Just('lg');
+		default:
+			return $elm$core$Maybe$Just('xl');
+	}
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$modalClass = function (size) {
+	var _v0 = $rundis$elm_bootstrap$Bootstrap$General$Internal$screenSizeOption(size);
+	if (_v0.$ === 'Just') {
+		var s = _v0.a;
+		return _List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('modal-' + s)
+			]);
+	} else {
+		return _List_Nil;
+	}
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$modalAttributes = function (options) {
+	return _Utils_ap(
+		options.attrs,
+		_Utils_ap(
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$classList(
+					_List_fromArray(
+						[
+							_Utils_Tuple2('modal-dialog', true),
+							_Utils_Tuple2('modal-dialog-centered', options.centered),
+							_Utils_Tuple2('modal-dialog-scrollable', options.scrollableBody)
+						])),
+					A2($elm$html$Html$Attributes$style, 'pointer-events', 'auto')
+				]),
+			A2(
+				$elm$core$Maybe$withDefault,
+				_List_Nil,
+				A2($elm$core$Maybe$map, $rundis$elm_bootstrap$Bootstrap$Modal$modalClass, options.modalSize))));
+};
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$renderBody = function (maybeBody) {
+	if (maybeBody.$ === 'Just') {
+		var cfg = maybeBody.a.a;
+		return $elm$core$Maybe$Just(
+			A2(
+				$elm$html$Html$div,
+				A2(
+					$elm$core$List$cons,
+					$elm$html$Html$Attributes$class('modal-body'),
+					cfg.attributes),
+				cfg.children));
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$renderFooter = function (maybeFooter) {
+	if (maybeFooter.$ === 'Just') {
+		var cfg = maybeFooter.a.a;
+		return $elm$core$Maybe$Just(
+			A2(
+				$elm$html$Html$div,
+				A2(
+					$elm$core$List$cons,
+					$elm$html$Html$Attributes$class('modal-footer'),
+					cfg.attributes),
+				cfg.children));
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $elm$html$Html$button = _VirtualDom_node('button');
+var $rundis$elm_bootstrap$Bootstrap$Modal$closeButton = function (closeMsg) {
+	return A2(
+		$elm$html$Html$button,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('close'),
+				$elm$html$Html$Events$onClick(closeMsg)
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('×')
+			]));
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$renderHeader = function (conf_) {
+	var _v0 = conf_.header;
+	if (_v0.$ === 'Just') {
+		var cfg = _v0.a.a;
+		return $elm$core$Maybe$Just(
+			A2(
+				$elm$html$Html$div,
+				A2(
+					$elm$core$List$cons,
+					$elm$html$Html$Attributes$class('modal-header'),
+					cfg.attributes),
+				_Utils_ap(
+					cfg.children,
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Modal$closeButton(
+							$rundis$elm_bootstrap$Bootstrap$Modal$getCloseMsg(conf_))
+						]))));
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $elm$html$Html$Attributes$tabindex = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'tabIndex',
+		$elm$core$String$fromInt(n));
+};
+var $rundis$elm_bootstrap$Bootstrap$Modal$view = F2(
+	function (visibility, _v0) {
+		var conf = _v0.a;
+		return A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_Utils_ap(
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_Utils_ap(
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$tabindex(-1)
+								]),
+							A2($rundis$elm_bootstrap$Bootstrap$Modal$display, visibility, conf)),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_Utils_ap(
+									_List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$attribute, 'role', 'document'),
+											$elm$html$Html$Attributes$class('elm-bootstrap-modal')
+										]),
+									_Utils_ap(
+										$rundis$elm_bootstrap$Bootstrap$Modal$modalAttributes(conf.options),
+										conf.options.hideOnBackdropClick ? _List_fromArray(
+											[
+												A2(
+												$elm$html$Html$Events$on,
+												'click',
+												$rundis$elm_bootstrap$Bootstrap$Modal$containerClickDecoder(conf.closeMsg))
+											]) : _List_Nil)),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$div,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('modal-content')
+											]),
+										A2(
+											$elm$core$List$filterMap,
+											$elm$core$Basics$identity,
+											_List_fromArray(
+												[
+													$rundis$elm_bootstrap$Bootstrap$Modal$renderHeader(conf),
+													$rundis$elm_bootstrap$Bootstrap$Modal$renderBody(conf.body),
+													$rundis$elm_bootstrap$Bootstrap$Modal$renderFooter(conf.footer)
+												])))
+									]))
+							]))
+					]),
+				A2($rundis$elm_bootstrap$Bootstrap$Modal$backdrop, visibility, conf)));
+	});
+var $author$project$Msg$UpdateMosaicSize = {$: 'UpdateMosaicSize'};
+var $elm$core$Basics$composeR = F3(
+	function (f, g, x) {
+		return g(
+			f(x));
+	});
+var $author$project$Msg$HideTile = {$: 'HideTile'};
+var $author$project$Msg$OpenModal = {$: 'OpenModal'};
+var $author$project$Msg$ShowTile = {$: 'ShowTile'};
+var $elm$core$String$fromFloat = _String_fromNumber;
+var $author$project$View$Mosaic$floatToPx = function (value) {
+	return $elm$core$String$fromFloat(value) + 'px';
+};
+var $author$project$View$Mosaic$intToPx = function (value) {
+	return $elm$core$String$fromInt(value) + 'px';
+};
 var $author$project$View$Mosaic$onLoad = function (message) {
 	return A2(
 		$elm$html$Html$Events$on,
@@ -5298,7 +5881,6 @@ var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$buttonFromId = functi
 			return $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$ErrorButton;
 	}
 };
-var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$int = _Json_decodeInt;
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$buttonDecoder = A2(
 	$elm$json$Json$Decode$map,
@@ -5368,12 +5950,6 @@ var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onWithOptions = F3(
 				$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$eventDecoder));
 	});
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onOut = A2($mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onWithOptions, 'mouseout', $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$defaultOptions);
-var $elm$core$Tuple$second = function (_v0) {
-	var y = _v0.b;
-	return y;
-};
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$core$Array$length = function (_v0) {
 	var len = _v0.a;
 	return len;
@@ -5392,107 +5968,25 @@ var $author$project$Mosaic$tilePosition = F3(
 		var y = (cell.a * size) + element.y;
 		return _Utils_Tuple2(x, y);
 	});
-var $elm$core$Bitwise$and = _Bitwise_and;
-var $elm$core$Bitwise$shiftRightZfBy = _Bitwise_shiftRightZfBy;
-var $elm$core$Array$bitMask = 4294967295 >>> (32 - $elm$core$Array$shiftStep);
-var $elm$core$Basics$ge = _Utils_ge;
-var $elm$core$Elm$JsArray$unsafeGet = _JsArray_unsafeGet;
-var $elm$core$Array$getHelp = F3(
-	function (shift, index, tree) {
-		getHelp:
-		while (true) {
-			var pos = $elm$core$Array$bitMask & (index >>> shift);
-			var _v0 = A2($elm$core$Elm$JsArray$unsafeGet, pos, tree);
-			if (_v0.$ === 'SubTree') {
-				var subTree = _v0.a;
-				var $temp$shift = shift - $elm$core$Array$shiftStep,
-					$temp$index = index,
-					$temp$tree = subTree;
-				shift = $temp$shift;
-				index = $temp$index;
-				tree = $temp$tree;
-				continue getHelp;
-			} else {
-				var values = _v0.a;
-				return A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, values);
-			}
-		}
-	});
-var $elm$core$Bitwise$shiftLeftBy = _Bitwise_shiftLeftBy;
-var $elm$core$Array$tailIndex = function (len) {
-	return (len >>> 5) << 5;
-};
-var $elm$core$Array$get = F2(
-	function (index, _v0) {
-		var len = _v0.a;
-		var startShift = _v0.b;
-		var tree = _v0.c;
-		var tail = _v0.d;
-		return ((index < 0) || (_Utils_cmp(index, len) > -1)) ? $elm$core$Maybe$Nothing : ((_Utils_cmp(
-			index,
-			$elm$core$Array$tailIndex(len)) > -1) ? $elm$core$Maybe$Just(
-			A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, tail)) : $elm$core$Maybe$Just(
-			A3($elm$core$Array$getHelp, startShift, index, tree)));
-	});
-var $elm$core$Maybe$withDefault = F2(
-	function (_default, maybe) {
-		if (maybe.$ === 'Just') {
-			var value = maybe.a;
-			return value;
-		} else {
-			return _default;
-		}
-	});
-var $author$project$Mosaic$tileSrc = F2(
-	function (cell, matrix) {
-		return A2(
-			$elm$core$Maybe$withDefault,
-			'',
-			A2(
-				$elm$core$Array$get,
-				cell.b,
-				A2(
-					$elm$core$Maybe$withDefault,
-					$elm$core$Array$empty,
-					A2($elm$core$Array$get, cell.a, matrix))));
-	});
-var $author$project$View$Mosaic$highligthedTile = function (_v0) {
-	var current = _v0.current;
-	var display = _v0.display;
-	var matrix = _v0.matrix;
-	var element = _v0.element;
-	var tile = function () {
-		if (current.$ === 'Just') {
-			var cell = current.a;
-			return _List_fromArray(
-				[
-					A2(
-					$elm$html$Html$img,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$src(
-							A2(
-								$elm$core$String$append,
-								'./mosaic/tiles/',
-								A2($author$project$Mosaic$tileSrc, cell, matrix))),
-							$author$project$View$Mosaic$onLoad($author$project$Msg$ShowTile),
-							$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onOut(
-							function (_v3) {
-								return $author$project$Msg$HideTile;
-							})
-						]),
-					_List_Nil)
-				]);
-		} else {
-			return _List_Nil;
-		}
-	}();
-	var displayValue = display ? 'block' : 'none';
+var $author$project$View$Mosaic$highligthedTile = function (model) {
+	var tile = A2(
+		$author$project$View$Mosaic$tileImage,
+		model,
+		_List_fromArray(
+			[
+				$author$project$View$Mosaic$onLoad($author$project$Msg$ShowTile),
+				$elm$html$Html$Events$onClick($author$project$Msg$OpenModal),
+				$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onOut(
+				function (_v1) {
+					return $author$project$Msg$HideTile;
+				})
+			]));
+	var displayValue = model.display ? 'block' : 'none';
 	var visibilityStyle = function () {
-		var _v1 = _Utils_Tuple2(current, element);
-		if ((_v1.a.$ === 'Just') && (_v1.b.$ === 'Just')) {
-			var cell = _v1.a.a;
-			var domElement = _v1.b.a;
+		var _v0 = _Utils_Tuple2(model.current, model.element);
+		if ((_v0.a.$ === 'Just') && (_v0.b.$ === 'Just')) {
+			var cell = _v0.a.a;
+			var domElement = _v0.b.a;
 			return _List_fromArray(
 				[
 					A2($elm$html$Html$Attributes$style, 'display', displayValue),
@@ -5501,17 +5995,17 @@ var $author$project$View$Mosaic$highligthedTile = function (_v0) {
 					'width',
 					$author$project$View$Mosaic$intToPx(
 						$elm$core$Basics$ceiling(
-							A2($author$project$Mosaic$tileSize, matrix, domElement)))),
+							A2($author$project$Mosaic$tileSize, model.matrix, domElement)))),
 					A2(
 					$elm$html$Html$Attributes$style,
 					'left',
 					$author$project$View$Mosaic$floatToPx(
-						A3($author$project$Mosaic$tilePosition, cell, matrix, domElement).a)),
+						A3($author$project$Mosaic$tilePosition, cell, model.matrix, domElement).a)),
 					A2(
 					$elm$html$Html$Attributes$style,
 					'top',
 					$author$project$View$Mosaic$floatToPx(
-						A3($author$project$Mosaic$tilePosition, cell, matrix, domElement).b))
+						A3($author$project$Mosaic$tilePosition, cell, model.matrix, domElement).b))
 				]);
 		} else {
 			return _List_fromArray(
@@ -5528,7 +6022,8 @@ var $author$project$View$Mosaic$highligthedTile = function (_v0) {
 					$elm$html$Html$Attributes$id('tile')
 				]),
 			visibilityStyle),
-		tile);
+		_List_fromArray(
+			[tile]));
 };
 var $author$project$Msg$LoadTile = function (a) {
 	return {$: 'LoadTile', a: a};
@@ -5594,6 +6089,7 @@ var $author$project$View$Mosaic$view = function (model) {
 					$elm$html$Html$Attributes$src('./mosaic/base.png'),
 					$author$project$View$Mosaic$onLoad($author$project$Msg$UpdateMosaicSize),
 					$elm$html$Html$Attributes$id('mosaic'),
+					$elm$html$Html$Attributes$class('img-fluid'),
 					$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onMove(
 					A2(
 						$elm$core$Basics$composeR,
@@ -5617,17 +6113,17 @@ var $author$project$View$body = function (model) {
 	return _List_fromArray(
 		[
 			A2(
-			$elm$html$Html$div,
+			$rundis$elm_bootstrap$Bootstrap$Grid$containerFluid,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('main')
+					$elm$html$Html$Attributes$class('main text-center')
 				]),
 			$author$project$View$Mosaic$view(model)),
 			A2(
-			$elm$html$Html$div,
+			$rundis$elm_bootstrap$Bootstrap$Grid$container,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('footer')
+					$elm$html$Html$Attributes$class('footer text-center')
 				]),
 			_List_fromArray(
 				[
@@ -5700,6 +6196,30 @@ var $author$project$View$body = function (model) {
 									_List_Nil)
 								]))
 						]))
+				])),
+			A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					$rundis$elm_bootstrap$Bootstrap$Modal$view,
+					model.modalVisibility,
+					A3(
+						$rundis$elm_bootstrap$Bootstrap$Modal$body,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$author$project$View$Mosaic$tileImage,
+								model,
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onClick($author$project$Msg$CloseModal)
+									]))
+							]),
+						$rundis$elm_bootstrap$Bootstrap$Modal$large(
+							$rundis$elm_bootstrap$Bootstrap$Modal$config($author$project$Msg$CloseModal))))
 				]))
 		]);
 };
@@ -5709,6 +6229,8 @@ var $author$project$View$document = function (model) {
 		title: 'Giovanna'
 	};
 };
+var $rundis$elm_bootstrap$Bootstrap$Modal$Hide = {$: 'Hide'};
+var $rundis$elm_bootstrap$Bootstrap$Modal$hidden = $rundis$elm_bootstrap$Bootstrap$Modal$Hide;
 var $elm$core$Elm$JsArray$foldl = _JsArray_foldl;
 var $elm$core$Elm$JsArray$indexedMap = _JsArray_indexedMap;
 var $elm$core$Array$indexedMap = F2(
@@ -5803,7 +6325,7 @@ var $author$project$Model$initialModel = function () {
 				function (n) {
 					return $elm$core$String$fromInt(n) + '.jpg';
 				})));
-	return {current: $elm$core$Maybe$Nothing, display: false, element: $elm$core$Maybe$Nothing, matrix: matrix};
+	return {current: $elm$core$Maybe$Nothing, display: false, element: $elm$core$Maybe$Nothing, matrix: matrix, modalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden};
 }();
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -6147,24 +6669,6 @@ var $elm$browser$Browser$Events$onEffects = F3(
 				$elm$core$Task$sequence(
 					A2($elm$core$List$map, $elm$core$Process$kill, deadPids))));
 	});
-var $elm$core$List$maybeCons = F3(
-	function (f, mx, xs) {
-		var _v0 = f(mx);
-		if (_v0.$ === 'Just') {
-			var x = _v0.a;
-			return A2($elm$core$List$cons, x, xs);
-		} else {
-			return xs;
-		}
-	});
-var $elm$core$List$filterMap = F2(
-	function (f, xs) {
-		return A3(
-			$elm$core$List$foldr,
-			$elm$core$List$maybeCons(f),
-			_List_Nil,
-			xs);
-	});
 var $elm$browser$Browser$Events$onSelfMsg = F3(
 	function (router, _v0, state) {
 		var key = _v0.key;
@@ -6255,11 +6759,23 @@ var $elm$core$Task$attempt = F2(
 							$elm$core$Result$Ok),
 						task))));
 	});
-var $elm$browser$Browser$Dom$getElement = _Browser_getElement;
-var $author$project$Model$removeTile = function (model) {
+var $author$project$Model$closeModal = function (model) {
 	return _Utils_update(
 		model,
+		{modalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$hidden});
+};
+var $elm$browser$Browser$Dom$getElement = _Browser_getElement;
+var $rundis$elm_bootstrap$Bootstrap$Modal$Show = {$: 'Show'};
+var $rundis$elm_bootstrap$Bootstrap$Modal$shown = $rundis$elm_bootstrap$Bootstrap$Modal$Show;
+var $author$project$Model$maybeRemoveTile = function (model) {
+	return _Utils_eq(model.modalVisibility, $rundis$elm_bootstrap$Bootstrap$Modal$shown) ? model : _Utils_update(
+		model,
 		{current: $elm$core$Maybe$Nothing, display: false});
+};
+var $author$project$Model$openModal = function (model) {
+	return _Utils_update(
+		model,
+		{modalVisibility: $rundis$elm_bootstrap$Bootstrap$Modal$shown});
 };
 var $author$project$Model$setElement = F2(
 	function (element, model) {
@@ -6284,7 +6800,7 @@ var $author$project$Model$showTile = function (model) {
 };
 var $author$project$Update$update = F2(
 	function (msg, model) {
-		_v0$5:
+		_v0$7:
 		while (true) {
 			switch (msg.$) {
 				case 'UpdateMosaicSize':
@@ -6301,7 +6817,7 @@ var $author$project$Update$update = F2(
 							A2($author$project$Model$setElement, element.element, model),
 							$elm$core$Platform$Cmd$none);
 					} else {
-						break _v0$5;
+						break _v0$7;
 					}
 				case 'LoadTile':
 					var tile = msg.a;
@@ -6314,10 +6830,18 @@ var $author$project$Update$update = F2(
 						$elm$core$Platform$Cmd$none);
 				case 'HideTile':
 					return _Utils_Tuple2(
-						$author$project$Model$removeTile(model),
+						$author$project$Model$maybeRemoveTile(model),
+						$elm$core$Platform$Cmd$none);
+				case 'CloseModal':
+					return _Utils_Tuple2(
+						$author$project$Model$closeModal(model),
+						$elm$core$Platform$Cmd$none);
+				case 'OpenModal':
+					return _Utils_Tuple2(
+						$author$project$Model$openModal(model),
 						$elm$core$Platform$Cmd$none);
 				default:
-					break _v0$5;
+					break _v0$7;
 			}
 		}
 		return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
