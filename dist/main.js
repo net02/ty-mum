@@ -5228,142 +5228,25 @@ var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty(
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$Attributes$title = $elm$html$Html$Attributes$stringProperty('title');
-var $author$project$Msg$HideTile = {$: 'HideTile'};
 var $author$project$Msg$UpdateMosaicSize = {$: 'UpdateMosaicSize'};
 var $elm$core$Basics$composeR = F3(
 	function (f, g, x) {
 		return g(
 			f(x));
 	});
-var $author$project$Msg$NoOp = {$: 'NoOp'};
-var $author$project$Msg$ShowTile = function (a) {
-	return {$: 'ShowTile', a: a};
+var $author$project$Msg$HideTile = {$: 'HideTile'};
+var $elm$core$String$fromFloat = _String_fromNumber;
+var $author$project$View$Mosaic$floatToPx = function (value) {
+	return $elm$core$String$fromFloat(value) + 'px';
 };
-var $elm$core$Bitwise$and = _Bitwise_and;
-var $elm$core$Bitwise$shiftRightZfBy = _Bitwise_shiftRightZfBy;
-var $elm$core$Array$bitMask = 4294967295 >>> (32 - $elm$core$Array$shiftStep);
-var $elm$core$Basics$ge = _Utils_ge;
-var $elm$core$Elm$JsArray$unsafeGet = _JsArray_unsafeGet;
-var $elm$core$Array$getHelp = F3(
-	function (shift, index, tree) {
-		getHelp:
-		while (true) {
-			var pos = $elm$core$Array$bitMask & (index >>> shift);
-			var _v0 = A2($elm$core$Elm$JsArray$unsafeGet, pos, tree);
-			if (_v0.$ === 'SubTree') {
-				var subTree = _v0.a;
-				var $temp$shift = shift - $elm$core$Array$shiftStep,
-					$temp$index = index,
-					$temp$tree = subTree;
-				shift = $temp$shift;
-				index = $temp$index;
-				tree = $temp$tree;
-				continue getHelp;
-			} else {
-				var values = _v0.a;
-				return A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, values);
-			}
-		}
-	});
-var $elm$core$Bitwise$shiftLeftBy = _Bitwise_shiftLeftBy;
-var $elm$core$Array$tailIndex = function (len) {
-	return (len >>> 5) << 5;
+var $author$project$View$Mosaic$intToPx = function (value) {
+	return $elm$core$String$fromInt(value) + 'px';
 };
-var $elm$core$Array$get = F2(
-	function (index, _v0) {
-		var len = _v0.a;
-		var startShift = _v0.b;
-		var tree = _v0.c;
-		var tail = _v0.d;
-		return ((index < 0) || (_Utils_cmp(index, len) > -1)) ? $elm$core$Maybe$Nothing : ((_Utils_cmp(
-			index,
-			$elm$core$Array$tailIndex(len)) > -1) ? $elm$core$Maybe$Just(
-			A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, tail)) : $elm$core$Maybe$Just(
-			A3($elm$core$Array$getHelp, startShift, index, tree)));
-	});
-var $elm$core$Array$length = function (_v0) {
-	var len = _v0.a;
-	return len;
-};
-var $elm$core$Maybe$withDefault = F2(
-	function (_default, maybe) {
-		if (maybe.$ === 'Just') {
-			var value = maybe.a;
-			return value;
-		} else {
-			return _default;
-		}
-	});
-var $author$project$Mosaic$columnsCount = function (matrix) {
-	return $elm$core$Array$length(
-		A2(
-			$elm$core$Maybe$withDefault,
-			$elm$core$Array$empty,
-			A2($elm$core$Array$get, 0, matrix)));
-};
-var $author$project$Mosaic$rowsCount = function (matrix) {
-	return $elm$core$Array$length(matrix);
-};
-var $elm$core$Tuple$second = function (_v0) {
-	var y = _v0.b;
-	return y;
-};
-var $author$project$Mosaic$cellFromCoords = F2(
-	function (coords, model) {
-		var row = $author$project$Mosaic$rowsCount(model.matrix);
-		var selectRow = function (element) {
-			return $elm$core$Basics$floor((coords.b * row) / element.height);
-		};
-		var column = $author$project$Mosaic$columnsCount(model.matrix);
-		var selectColumn = function (element) {
-			return $elm$core$Basics$floor((coords.a * column) / element.width);
-		};
-		var _v0 = model.element;
-		if (_v0.$ === 'Just') {
-			var element = _v0.a;
-			return $elm$core$Maybe$Just(
-				_Utils_Tuple2(
-					selectRow(element),
-					selectColumn(element)));
-		} else {
-			return $elm$core$Maybe$Nothing;
-		}
-	});
-var $author$project$Mosaic$sameTile = F2(
-	function (coords, model) {
-		return _Utils_eq(
-			model.current,
-			A2($author$project$Mosaic$cellFromCoords, coords, model));
-	});
-var $author$project$View$Mosaic$maybeUpdateTile = F2(
-	function (model, coords) {
-		if (A2($author$project$Mosaic$sameTile, coords, model)) {
-			return $author$project$Msg$NoOp;
-		} else {
-			var _v0 = A2($author$project$Mosaic$cellFromCoords, coords, model);
-			if (_v0.$ === 'Just') {
-				var tile = _v0.a;
-				return $author$project$Msg$ShowTile(tile);
-			} else {
-				return $author$project$Msg$HideTile;
-			}
-		}
-	});
-var $elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 'Normal', a: a};
-};
-var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
-var $elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$Normal(decoder));
-	});
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$defaultOptions = {preventDefault: true, stopPropagation: false};
 var $elm$virtual_dom$VirtualDom$Custom = function (a) {
 	return {$: 'Custom', a: a};
 };
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
 var $elm$html$Html$Events$custom = F2(
 	function (event, decoder) {
 		return A2(
@@ -5466,8 +5349,212 @@ var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onWithOptions = F3(
 				},
 				$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$eventDecoder));
 	});
-var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onMove = A2($mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onWithOptions, 'mousemove', $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$defaultOptions);
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onOut = A2($mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onWithOptions, 'mouseout', $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$defaultOptions);
+var $elm$core$Tuple$second = function (_v0) {
+	var y = _v0.b;
+	return y;
+};
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $elm$core$Array$length = function (_v0) {
+	var len = _v0.a;
+	return len;
+};
+var $author$project$Mosaic$rowsCount = function (matrix) {
+	return $elm$core$Array$length(matrix);
+};
+var $author$project$Mosaic$tileSize = F2(
+	function (matrix, element) {
+		return element.height / $author$project$Mosaic$rowsCount(matrix);
+	});
+var $author$project$Mosaic$tilePosition = F3(
+	function (cell, matrix, element) {
+		var size = A2($author$project$Mosaic$tileSize, matrix, element);
+		var x = (cell.b * size) + element.x;
+		var y = (cell.a * size) + element.y;
+		return _Utils_Tuple2(x, y);
+	});
+var $author$project$View$Mosaic$highligthedTile = function (_v0) {
+	var current = _v0.current;
+	var matrix = _v0.matrix;
+	var element = _v0.element;
+	var visibilityStyle = function () {
+		var _v3 = _Utils_Tuple2(current, element);
+		if ((_v3.a.$ === 'Just') && (_v3.b.$ === 'Just')) {
+			var cell = _v3.a.a;
+			var domElement = _v3.b.a;
+			return _List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'display', 'block'),
+					A2(
+					$elm$html$Html$Attributes$style,
+					'width',
+					$author$project$View$Mosaic$intToPx(
+						$elm$core$Basics$ceiling(
+							A2($author$project$Mosaic$tileSize, matrix, domElement)))),
+					A2(
+					$elm$html$Html$Attributes$style,
+					'left',
+					$author$project$View$Mosaic$floatToPx(
+						A3($author$project$Mosaic$tilePosition, cell, matrix, domElement).a)),
+					A2(
+					$elm$html$Html$Attributes$style,
+					'top',
+					$author$project$View$Mosaic$floatToPx(
+						A3($author$project$Mosaic$tilePosition, cell, matrix, domElement).b))
+				]);
+		} else {
+			return _List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'display', 'none')
+				]);
+		}
+	}();
+	var tile = function () {
+		if (current.$ === 'Just') {
+			var cell = current.a;
+			return _List_fromArray(
+				[
+					A2(
+					$elm$html$Html$img,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$src('./mosaic/tiles/test.jpg'),
+							$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onOut(
+							function (_v2) {
+								return $author$project$Msg$HideTile;
+							})
+						]),
+					_List_Nil)
+				]);
+		} else {
+			return _List_Nil;
+		}
+	}();
+	return A2(
+		$elm$html$Html$div,
+		_Utils_ap(
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$id('tile')
+				]),
+			visibilityStyle),
+		tile);
+};
+var $author$project$Msg$NoOp = {$: 'NoOp'};
+var $author$project$Msg$ShowTile = function (a) {
+	return {$: 'ShowTile', a: a};
+};
+var $elm$core$Bitwise$and = _Bitwise_and;
+var $elm$core$Bitwise$shiftRightZfBy = _Bitwise_shiftRightZfBy;
+var $elm$core$Array$bitMask = 4294967295 >>> (32 - $elm$core$Array$shiftStep);
+var $elm$core$Basics$ge = _Utils_ge;
+var $elm$core$Elm$JsArray$unsafeGet = _JsArray_unsafeGet;
+var $elm$core$Array$getHelp = F3(
+	function (shift, index, tree) {
+		getHelp:
+		while (true) {
+			var pos = $elm$core$Array$bitMask & (index >>> shift);
+			var _v0 = A2($elm$core$Elm$JsArray$unsafeGet, pos, tree);
+			if (_v0.$ === 'SubTree') {
+				var subTree = _v0.a;
+				var $temp$shift = shift - $elm$core$Array$shiftStep,
+					$temp$index = index,
+					$temp$tree = subTree;
+				shift = $temp$shift;
+				index = $temp$index;
+				tree = $temp$tree;
+				continue getHelp;
+			} else {
+				var values = _v0.a;
+				return A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, values);
+			}
+		}
+	});
+var $elm$core$Bitwise$shiftLeftBy = _Bitwise_shiftLeftBy;
+var $elm$core$Array$tailIndex = function (len) {
+	return (len >>> 5) << 5;
+};
+var $elm$core$Array$get = F2(
+	function (index, _v0) {
+		var len = _v0.a;
+		var startShift = _v0.b;
+		var tree = _v0.c;
+		var tail = _v0.d;
+		return ((index < 0) || (_Utils_cmp(index, len) > -1)) ? $elm$core$Maybe$Nothing : ((_Utils_cmp(
+			index,
+			$elm$core$Array$tailIndex(len)) > -1) ? $elm$core$Maybe$Just(
+			A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, tail)) : $elm$core$Maybe$Just(
+			A3($elm$core$Array$getHelp, startShift, index, tree)));
+	});
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var $author$project$Mosaic$columnsCount = function (matrix) {
+	return $elm$core$Array$length(
+		A2(
+			$elm$core$Maybe$withDefault,
+			$elm$core$Array$empty,
+			A2($elm$core$Array$get, 0, matrix)));
+};
+var $author$project$Mosaic$cellFromCoords = F2(
+	function (coords, model) {
+		var row = $author$project$Mosaic$rowsCount(model.matrix);
+		var selectRow = function (element) {
+			return $elm$core$Basics$floor((coords.b * row) / element.height);
+		};
+		var column = $author$project$Mosaic$columnsCount(model.matrix);
+		var selectColumn = function (element) {
+			return $elm$core$Basics$floor((coords.a * column) / element.width);
+		};
+		var _v0 = model.element;
+		if (_v0.$ === 'Just') {
+			var element = _v0.a;
+			return $elm$core$Maybe$Just(
+				_Utils_Tuple2(
+					selectRow(element),
+					selectColumn(element)));
+		} else {
+			return $elm$core$Maybe$Nothing;
+		}
+	});
+var $author$project$Mosaic$isSameTile = F2(
+	function (coords, model) {
+		return _Utils_eq(
+			model.current,
+			A2($author$project$Mosaic$cellFromCoords, coords, model));
+	});
+var $author$project$View$Mosaic$maybeUpdateTile = F2(
+	function (model, coords) {
+		if (A2($author$project$Mosaic$isSameTile, coords, model)) {
+			return $author$project$Msg$NoOp;
+		} else {
+			var _v0 = A2($author$project$Mosaic$cellFromCoords, coords, model);
+			if (_v0.$ === 'Just') {
+				var tile = _v0.a;
+				return $author$project$Msg$ShowTile(tile);
+			} else {
+				return $author$project$Msg$HideTile;
+			}
+		}
+	});
+var $elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 'Normal', a: a};
+};
+var $elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onMove = A2($mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onWithOptions, 'mousemove', $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$defaultOptions);
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onOver = A2($mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onWithOptions, 'mouseover', $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$defaultOptions);
 var $author$project$View$Mosaic$view = function (model) {
 	var onLoad = function (message) {
@@ -5492,10 +5579,6 @@ var $author$project$View$Mosaic$view = function (model) {
 							return $.offsetPos;
 						},
 						$author$project$View$Mosaic$maybeUpdateTile(model))),
-					$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onOut(
-					function (_v0) {
-						return $author$project$Msg$HideTile;
-					}),
 					$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onOver(
 					A2(
 						$elm$core$Basics$composeR,
@@ -5504,7 +5587,8 @@ var $author$project$View$Mosaic$view = function (model) {
 						},
 						$author$project$View$Mosaic$maybeUpdateTile(model)))
 				]),
-			_List_Nil)
+			_List_Nil),
+			$author$project$View$Mosaic$highligthedTile(model)
 		]);
 };
 var $author$project$View$body = function (model) {

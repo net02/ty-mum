@@ -1,6 +1,8 @@
 module Mosaic exposing
     ( cellFromCoords
-    , sameTile
+    , isSameTile
+    , tilePosition
+    , tileSize
     )
 
 import Array exposing (Array)
@@ -32,9 +34,29 @@ cellFromCoords coords model =
             Nothing
 
 
-sameTile : Coordinates -> Model -> Bool
-sameTile coords model =
+isSameTile : Coordinates -> Model -> Bool
+isSameTile coords model =
     model.current == cellFromCoords coords model
+
+
+tileSize : Matrix -> DomElement -> Float
+tileSize matrix element =
+    element.height / (matrix |> rowsCount |> toFloat)
+
+
+tilePosition : Cell -> Matrix -> DomElement -> ( Float, Float )
+tilePosition cell matrix element =
+    let
+        size =
+            tileSize matrix element
+
+        x =
+            (cell |> Tuple.second |> toFloat) * size + element.x
+
+        y =
+            (cell |> Tuple.first |> toFloat) * size + element.y
+    in
+    ( x, y )
 
 
 rowsCount : Matrix -> Int

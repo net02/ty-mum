@@ -22,16 +22,47 @@ view model =
         , onLoad Msg.UpdateMosaicSize
         , id "mosaic"
         , Mouse.onMove (.offsetPos >> maybeUpdateTile model)
-        , Mouse.onOut (\_ -> Msg.HideTile)
         , Mouse.onOver (.offsetPos >> maybeUpdateTile model)
         ]
         []
+    , highligthedTile model
     ]
+
+
+highligthedTile : Model -> Html Msg
+highligthedTile { current, matrix, element } =
+    let
+        visibilityStyle =
+            case ( current, element ) of
+                ( Just cell, Just domElement ) ->
+                    [ style "display" "block"
+                    , domElement |> Mosaic.tileSize matrix |> ceiling |> intToPx |> style "width"
+                    , domElement |> Mosaic.tilePosition cell matrix |> Tuple.first |> floatToPx |> style "left"
+                    , domElement |> Mosaic.tilePosition cell matrix |> Tuple.second |> floatToPx |> style "top"
+                    ]
+
+                _ ->
+                    [ style "display" "none" ]
+
+        tile =
+            case current of
+                Just cell ->
+                    [ img
+                        [ src "./mosaic/tiles/test.jpg"
+                        , Mouse.onOut (\_ -> Msg.HideTile)
+                        ]
+                        []
+                    ]
+
+                Nothing ->
+                    []
+    in
+    div ([ id "tile" ] ++ visibilityStyle) tile
 
 
 maybeUpdateTile : Model -> Model.Coordinates -> Msg
 maybeUpdateTile model coords =
-    if Mosaic.sameTile coords model then
+    if Mosaic.isSameTile coords model then
         Msg.NoOp
 
     else
@@ -41,3 +72,13 @@ maybeUpdateTile model coords =
 
             Nothing ->
                 Msg.HideTile
+
+
+floatToPx : Float -> String
+floatToPx value =
+    String.fromFloat value ++ "px"
+
+
+intToPx : Int -> String
+intToPx value =
+    String.fromInt value ++ "px"
