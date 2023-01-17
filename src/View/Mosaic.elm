@@ -16,6 +16,7 @@ view model =
         [ src "./mosaic/base.png"
         , onLoad Msg.UpdateMosaicSize
         , id "mosaic"
+        , class "img-fluid"
         , Mouse.onMove (.offsetPos >> maybeUpdateTile model)
         , Mouse.onOver (.offsetPos >> maybeUpdateTile model)
         ]

@@ -5239,6 +5239,30 @@ var $rundis$elm_bootstrap$Bootstrap$Modal$config = function (closeMsg) {
 		});
 };
 var $elm$html$Html$div = _VirtualDom_node('div');
+var $rundis$elm_bootstrap$Bootstrap$Grid$container = F2(
+	function (attributes, children) {
+		return A2(
+			$elm$html$Html$div,
+			_Utils_ap(
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('container')
+					]),
+				attributes),
+			children);
+	});
+var $rundis$elm_bootstrap$Bootstrap$Grid$containerFluid = F2(
+	function (attributes, children) {
+		return A2(
+			$elm$html$Html$div,
+			_Utils_ap(
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('container-fluid')
+					]),
+				attributes),
+			children);
+	});
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -6065,6 +6089,7 @@ var $author$project$View$Mosaic$view = function (model) {
 					$elm$html$Html$Attributes$src('./mosaic/base.png'),
 					$author$project$View$Mosaic$onLoad($author$project$Msg$UpdateMosaicSize),
 					$elm$html$Html$Attributes$id('mosaic'),
+					$elm$html$Html$Attributes$class('img-fluid'),
 					$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onMove(
 					A2(
 						$elm$core$Basics$composeR,
@@ -6088,17 +6113,17 @@ var $author$project$View$body = function (model) {
 	return _List_fromArray(
 		[
 			A2(
-			$elm$html$Html$div,
+			$rundis$elm_bootstrap$Bootstrap$Grid$containerFluid,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('main')
+					$elm$html$Html$Attributes$class('main text-center')
 				]),
 			$author$project$View$Mosaic$view(model)),
 			A2(
-			$elm$html$Html$div,
+			$rundis$elm_bootstrap$Bootstrap$Grid$container,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('footer')
+					$elm$html$Html$Attributes$class('footer text-center')
 				]),
 			_List_fromArray(
 				[

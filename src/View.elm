@@ -1,5 +1,6 @@
 module View exposing (document)
 
+import Bootstrap.Grid as Grid
 import Bootstrap.Modal as Modal
 import Browser exposing (Document)
 import Html exposing (..)
@@ -19,8 +20,8 @@ document model =
 
 body : Model -> List (Html Msg)
 body model =
-    [ div [ class "main" ] (Mosaic.view model)
-    , div [ class "footer" ]
+    [ Grid.containerFluid [ class "main text-center" ] (Mosaic.view model)
+    , Grid.container [ class "footer text-center" ]
         [ p []
             [ text "Affamato? "
             , a [ href "https://docs.google.com/document/d/1vdujqysOnhKWjopHmlcQNZJG6tEGFvSIYq-QnseXHXU/edit?usp=sharing" ] [ text "torna alle ricette" ]
