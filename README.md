@@ -17,12 +17,12 @@ A static, single page application website to honour my mother
 ### Bucket list
 TODOs, nice-to-have and ideas
 
-- [ ] add on-hover pop-up effect on single photos
+- [x] add on-hover pop-up effect on single photos
 - [ ] add zoom-in modal on single photos
 - [ ] with a carousel, *blackjack and hookers!*
 - [ ] switch photos from cropped to full size original image
 - [ ] use a deploy script to compile in prod mode & manage assets
-- [ ] setup analytics
+- [x] ~~setup analytics~~ no need to, using cloudflare ones
 - [ ] add captions
 - [ ] add "go full-screen" buttons
 - [x] ~~no i won't add a cookie settings banner, thank you!~~
