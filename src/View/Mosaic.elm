@@ -1,4 +1,4 @@
-module View.Mosaic exposing (tileImage, view)
+module View.Mosaic exposing (image, view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -12,8 +12,22 @@ import Msg exposing (Msg)
 
 view : Model -> List (Html Msg)
 view model =
+    let
+        imageSrc : String
+        imageSrc =
+            case model.element of
+                Just element ->
+                    if element.width > 1300.0 then
+                        "./mosaic/base_xl.jpg"
+
+                    else
+                        "./mosaic/base_m.jpg"
+
+                Nothing ->
+                    "./mosaic/base_m.jpg"
+    in
     [ img
-        [ src "./mosaic/base.png"
+        [ src imageSrc
         , onLoad Msg.UpdateMosaicSize
         , id "mosaic"
         , class "img-fluid"
@@ -48,7 +62,8 @@ highligthedTile model =
                     [ style "display" "none" ]
 
         tile =
-            tileImage model
+            image model
+                "tiles"
                 [ onLoad Msg.ShowTile
                 , onClick Msg.OpenModal
                 , Mouse.onOut (\_ -> Msg.HideTile)
@@ -57,11 +72,14 @@ highligthedTile model =
     div ([ id "tile" ] ++ visibilityStyle) [ tile ]
 
 
-tileImage : Model -> List (Attribute Msg) -> Html Msg
-tileImage { current, matrix } attributes =
+image : Model -> String -> List (Attribute Msg) -> Html Msg
+image { current, matrix } prefix attributes =
     let
+        path =
+            "./mosaic/" ++ prefix ++ "/"
+
         imageSrc cell =
-            src (matrix |> Mosaic.tileSrc cell |> String.append "./mosaic/tiles/")
+            src (matrix |> Mosaic.tileSrc cell |> String.append path)
     in
     case current of
         Just cell ->

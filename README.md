@@ -20,12 +20,13 @@ TODOs, nice-to-have and ideas
 - [x] add on-hover pop-up effect on single photos
 - [x] add zoom-in modal on single photos
 - [ ] with a carousel, *blackjack and hookers!*
-- [ ] switch photos from cropped to full size original image
+- [ ] add a toggle to switch between the overlayed or basic mosaic
+- [x] switch photos from cropped to full size original image
 - [ ] use a deploy script to compile in prod mode & manage assets
 - [x] ~~setup analytics~~ no need to, using cloudflare ones
+- [x] ~~no i won't add a cookie settings banner, thank you!~~
 - [ ] add captions
 - [ ] add "go full-screen" buttons
-- [x] ~~no i won't add a cookie settings banner, thank you!~~
 - [ ] improve mobile UX/UI
-- [ ] add photos' location and show it a map
+- [ ] add photos' location and show them on a map
 - [ ] add a loader at startup, animations and some extra *fronzoli*

@@ -39,7 +39,7 @@ body model =
     , div []
         [ Modal.config Msg.CloseModal
             |> Modal.large
-            |> Modal.body [] [ Mosaic.tileImage model [ onClick Msg.CloseModal ] ]
+            |> Modal.body [] [ Mosaic.image model "images" [ onClick Msg.CloseModal ] ]
             |> Modal.view model.modalVisibility
         ]
     ]
