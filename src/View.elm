@@ -20,6 +20,14 @@ document model =
 
 body : Model -> List (Html Msg)
 body model =
+    let
+        prefix =
+            if model.modalVisibility == Modal.shown then
+                "images"
+
+            else
+                "tiles"
+    in
     [ Grid.containerFluid [ class "main text-center" ] (Mosaic.view model)
     , Grid.container [ class "footer text-center" ]
         [ p []
@@ -39,7 +47,7 @@ body model =
     , div []
         [ Modal.config Msg.CloseModal
             |> Modal.large
-            |> Modal.body [] [ Mosaic.image model "images" [ onClick Msg.CloseModal ] ]
+            |> Modal.body [] [ Mosaic.image model prefix [ onClick Msg.CloseModal ] ]
             |> Modal.view model.modalVisibility
         ]
     ]
